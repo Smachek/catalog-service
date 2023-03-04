@@ -8,6 +8,9 @@ group = 'com.polarbookshop'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
+ext {
+    set('springCloudVersion', "2021.0.5")
+}
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
@@ -21,11 +24,19 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.retry:spring-retry'
 
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 tasks.named('test') {
