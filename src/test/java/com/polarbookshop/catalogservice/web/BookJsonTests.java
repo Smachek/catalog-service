@@ -19,7 +19,7 @@ public class BookJsonTests {
 
     @Test
     void testSerialize() throws IOException {
-        var book = new Book((long) 1, "1234567890", "Title", "Author", 9.90,  Instant.now(), Instant.now(), 0);
+        var book = new Book((long) 1, "1234567890", "Title", "Author", 9.90, "Polarpub",  Instant.now(), Instant.now(), 0);
         var jsonContent = json.write(book);
 
         assertThat(jsonContent).extractingJsonPathNumberValue("@.id"). isEqualTo(book.id().intValue());
@@ -27,6 +27,7 @@ public class BookJsonTests {
         assertThat(jsonContent).extractingJsonPathStringValue("@.title").isEqualTo(book.title());
         assertThat(jsonContent).extractingJsonPathStringValue("@.author").isEqualTo(book.author());
         assertThat(jsonContent).extractingJsonPathNumberValue("@.price").isEqualTo(book.price());
+        assertThat(jsonContent).extractingJsonPathStringValue("@.publisher").isEqualTo(book.publisher());
         assertThat(jsonContent).extractingJsonPathStringValue("@.createdDate").isEqualTo(book.createdDate().toString());
         assertThat(jsonContent).extractingJsonPathStringValue("@.lastModifiedDate").isEqualTo(book.lastModifiedDate().toString());
         assertThat(jsonContent).extractingJsonPathNumberValue("@.version").isEqualTo(book.version());
@@ -42,6 +43,7 @@ public class BookJsonTests {
                     "title":"Title",
                     "author":"Author",
                     "price":9.90,
+                    "publisher":"Polarpub",
                     "createdDate":"2022-03-08T17:30:40.135799Z",
                     "lastModifiedDate":"2022-03-08T17:30:40.135799Z",
                     "version":0
@@ -49,6 +51,6 @@ public class BookJsonTests {
                 """;
         assertThat(json.parse(content))
                 .usingRecursiveComparison()
-                .isEqualTo(new Book(1L, "1234567890", "Title", "Author", 9.90, instant, instant, 0));
+                .isEqualTo(new Book(1L, "1234567890", "Title", "Author", 9.90, "Polarpub", instant, instant, 0));
     }
 }
