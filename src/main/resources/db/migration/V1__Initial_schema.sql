@@ -1,4 +1,3 @@
-drop table if exists book;
 create table book
 (
     id                 bigserial primary key not null,
