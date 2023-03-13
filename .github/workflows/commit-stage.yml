@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-22.04
     permissions:
       contents: read
-      package: write
+      packages: write
       security-events: write
     steps:
       - name: Checkout source code
