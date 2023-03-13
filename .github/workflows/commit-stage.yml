@@ -44,7 +44,7 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: [ build ]
     runs-on: ubuntu-22.04
-    permission:
+    permissions:
       contents: read
       package: write
       security-events: write
